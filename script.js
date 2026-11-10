@@ -26,13 +26,23 @@ function renderProducts(products) {
 
         const titleElem = document.createElement("h2");
         titleElem.classList.add("product-title");
-        titleElem.innerText = product.name;
+        titleElem.innerText = product.title;
 
         const descriptionElem = document.createElement("p");
         descriptionElem.classList.add("product-price");
         descriptionElem.innerText = product.price;
 
-
+        articleElement.append(titleElem, imgElem, descriptionElem);
+        productElem.appendChild(articleElement);
     })
 }
+
+loadBtn.addEventListener("click", async () => {
+    try {
+        const data = await getProduct(8);
+        renderProducts(data.products);
+    } catch (error) {
+        console.error(error);
+    }
+});
 
