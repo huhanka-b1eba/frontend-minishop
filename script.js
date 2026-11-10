@@ -2,6 +2,7 @@ const productElem = document.querySelector("#products");
 const searchBtn = document.querySelector("#search-btn");
 const loadBtn = document.querySelector("#load-btn");
 const addBtn = document.querySelector("#add-btn");
+const inputElem = document.querySelector("#search");
 
 async function getProduct(limit) {
     const response = await fetch(`https://dummyjson.com/products?limit=${limit}`);
@@ -46,4 +47,25 @@ loadBtn.addEventListener("click", async () => {
         console.error(error);
     }
 });
+
+async function searchProducts(query) {
+    const response = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}
+
+searchBtn.addEventListener("click", async () => {
+    try {
+        const query = inputElem.value.trim();
+        const data = await searchProducts(query);
+        renderProducts(data.products);
+    } catch (error) {
+        throw new Error(error);
+    }
+
+})
 
