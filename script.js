@@ -89,3 +89,19 @@ async function addProduct(product) {
     return await response.json();
 }
 
+addBtn.addEventListener("click", async () => {
+    const product = {
+        title: "Gaming Mouse",
+        price: 250
+    }
+
+    messageElem.innerText = "Loading...";
+
+    try {
+        const data = await addProduct(product);
+        console.log(data);
+        messageElem.innerText = `Товар успешно ${product.title} добавлен`;
+    } catch (error) {
+        messageElem.innerText = error.message;
+    }
+})
