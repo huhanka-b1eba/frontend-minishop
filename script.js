@@ -13,3 +13,26 @@ async function getProduct(limit) {
     return await response.json();
 }
 
+function renderProducts(products) {
+
+    products.forEach(product => {
+        const articleElement = document.createElement("article");
+        articleElement.classList.add("product-card");
+
+        const imgElem = document.createElement("img");
+        imgElem.classList.add("product-image");
+        imgElem.src = product.thumbnail;
+        imgElem.alt = product.title;
+
+        const titleElem = document.createElement("h2");
+        titleElem.classList.add("product-title");
+        titleElem.innerText = product.name;
+
+        const descriptionElem = document.createElement("p");
+        descriptionElem.classList.add("product-price");
+        descriptionElem.innerText = product.price;
+
+
+    })
+}
+
