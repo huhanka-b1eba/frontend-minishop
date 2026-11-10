@@ -14,6 +14,7 @@ async function getProduct(limit) {
 }
 
 function renderProducts(products) {
+    productElem.replaceChildren()
 
     products.forEach(product => {
         const articleElement = document.createElement("article");
