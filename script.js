@@ -3,6 +3,7 @@ const searchBtn = document.querySelector("#search-btn");
 const loadBtn = document.querySelector("#load-btn");
 const addBtn = document.querySelector("#add-btn");
 const inputElem = document.querySelector("#search");
+const messageElem = document.querySelector("#message");
 
 async function getProduct(limit) {
     const response = await fetch(`https://dummyjson.com/products?limit=${limit}`);
@@ -40,11 +41,15 @@ function renderProducts(products) {
 }
 
 loadBtn.addEventListener("click", async () => {
+    messageElem.innerText = "Loading...";
+    loadBtn.disabled = true;
     try {
         const data = await getProduct(8);
+        messageElem.innerText = "";
+        loadBtn.disabled = false;
         renderProducts(data.products);
     } catch (error) {
-        console.error(error);
+        messageElem.innerText = error.message;
     }
 });
 
@@ -66,6 +71,21 @@ searchBtn.addEventListener("click", async () => {
     } catch (error) {
         throw new Error(error);
     }
-
 })
+
+async function addProduct(product) {
+    const response = await fetch(`https://dummyjson.com/products/add`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+    });
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return await response.json();
+}
 
