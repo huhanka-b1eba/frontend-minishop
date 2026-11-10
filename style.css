@@ -37,7 +37,7 @@ h1 {
 .controls {
     margin-top: 24px;
     display: grid;
-    grid-template-columns: minmax(240px, 1fr) auto auto;
+    grid-template-columns: minmax(240px, 1fr) auto auto auto;
     gap: 10px;
 }
 
@@ -86,12 +86,14 @@ h1 {
     outline-offset: 2px;
 }
 
+#load-btn,
 #add-btn {
     color: #000000;
     background-color: #ffffff;
     border-color: #000000;
 }
 
+#load-btn:hover,
 #add-btn:hover {
     background-color: #eeeeee;
     border-color: #000000;
